@@ -13,12 +13,13 @@ ARG BRANCH=develop
 # as the perl interpreter updates have broken the library unit tests
 RUN apt-get update -y && apt-get install -y apt-utils && \
     apt-get install -y ca-certificates cpanminus python-minimal python-pip openssl wget \
-            libhttp-parser-xs-perl && \
+            libhttp-parser-xs-perl libssl-dev libz-dev && \
     update-ca-certificates && \
     pip install shinto-cli[yaml] && \
-    cpanm HTTP::Request LWP::UserAgent JSON Exception::Class Config::Simple Object::Tiny::RW \
-          Starman Plack::Handler::Starman Plack::Middleware::CrossOrigin JSON::RPC::Client \
-          inc::Module::Install Class::Accessor && \
+    cpanm HTTP::Request LWP::UserAgent LWP::Protocol::https JSON Exception::Class \
+          Config::Simple Object::Tiny::RW Starman Plack::Handler::Starman \
+          Plack::Middleware::CrossOrigin JSON::RPC::Client inc::Module::Install \
+          Class::Accessor && \
     cpanm -f http://search.cpan.org/CPAN/authors/id/D/DO/DOY/Moose-2.0604.tar.gz && \
     cpanm -f RPC::Any::Server::JSONRPC::PSGI
 
