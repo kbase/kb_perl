@@ -21,10 +21,12 @@ RUN apt-get update -y && apt-get install -y apt-utils && \
           Plack::Middleware::CrossOrigin JSON::RPC::Client inc::Module::Install \
           Class::Accessor && \
     cpanm -f http://search.cpan.org/CPAN/authors/id/D/DO/DOY/Moose-2.0604.tar.gz && \
-    cpanm -f RPC::Any::Server::JSONRPC::PSGI
+    cpanm -f RPC::Any::Server::JSONRPC::PSGI && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 # Setup the base perl libs
-CMD mkdir -p /kb/deployment/lib
+RUN mkdir -p /kb/deployment/lib
+
 ENV PERL5LIB /kb/deployment/lib
 COPY deployment /kb/deployment
 
