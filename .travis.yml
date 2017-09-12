@@ -1,9 +1,11 @@
-language: bash
+language: perl
 sudo: required
 services:
 - docker
 before_script:
 - sudo apt-get update && sudo apt-get install git
+- cpanm Template::Tools::tpage
+
 script:
 - make
 after_success:
